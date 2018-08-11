@@ -28,7 +28,7 @@ echo 'leds.set_color("LEFT", "AMBER")
 tts.play(sound, "我是乐高EV3机器人")' | http http://10.0.0.100:5000/run
 ```
 
-** ev3 的 cpu实在太卡太卡，python环境下简直考验耐性。 有人尝试过树莓派封装的主控 https://www.dexterindustries.com/shop/brickpi-advanced-for-raspberry-pi/ 吗？ 这个要是功耗、稳定性、兼容性都 ok 的话，应该还挺爽 **
+* ev3 的 cpu实在太卡太卡，python环境下简直考验耐性。 有人尝试过树莓派封装的主控 https://www.dexterindustries.com/shop/brickpi-advanced-for-raspberry-pi/ 吗？ 这个要是功耗、稳定性、兼容性都 ok 的话，应该还挺爽 *
 
 [1]: https://www.ev3dev.org/
 [2]: https://github.com/ev3dev/ev3dev-buildscripts
