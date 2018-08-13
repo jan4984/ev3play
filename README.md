@@ -4,7 +4,7 @@
 * 闲置在家的小米随身usb wifi插入USB竟然能用，感谢最新内核
 * py环境是自带的，本来想用js，但node新版本放弃了对armel架构的支持，官方建议用py就用吧
 
-![](/ev3-with-xiaomi-wifi.png | width=640)
+<img src="https://github.com/jan4984/ev3play/raw/master/ev3-with-xiaomi-wifi.png" width="320"/>
 
 ### 中文TTS
  ev3是有可以播放pcm的喇叭的，自带的Sound python库不支持中文。既然已经可以上网了，那我们就用目前世界第一的中文TTS——讯飞。
