@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+    const ep = 'http://10.0.0.100:8080';
+    //const ep = 'http://127.0.0.1:8080';
+    const motorEp = ep + '/motor';
+    const leftM = motorEp + '/ev3-ports:outD';
+    const rightM = motorEp + '/ev3-ports:outA';
+    const driverName = 'lego-ev3-l-motor';
+    const initSpeed = -50;
+
+    let pressedKey = '';
+    const run = async (leftSpeed, rightSpeed)=> {
+        await fetch(leftM + '/write/duty_cycle_sp/' + leftSpeed, {
+            method: 'POST'
+        });
+        await fetch(rightM + '/write/duty_cycle_sp/' + rightSpeed, {
+            method: 'POST'
+        });
+        fetch(leftM + '/write/command/run-direct', {
+            method: 'POST'
+        });
+        fetch(rightM + '/write/command/run-direct', {
+            method: 'POST'
+        });
+    };
+    const stop = async () =>{
+        fetch(leftM + '/write/command/stop', {
+            method: 'POST'
+        });
+        fetch(rightM + '/write/command/stop', {
+            method: 'POST'
+        });
+    };
+    const processKey = ()=>{
+        switch(pressedKey){
+            case 'ArrowUp':
+                run(initSpeed, initSpeed);
+                break;
+            case 'ArrowDown':
+                run(-initSpeed, -initSpeed);
+                break;
+            case 'ArrowLeft':
+                run(Math.floor(-initSpeed/2), Math.floor(initSpeed/2));
+                break;
+            case 'ArrowRight':
+                run(Math.floor(initSpeed/2), Math.floor(-initSpeed/2));
+                break;
+        }
+    };
+    const onKeyDown=(key)=>{
+        if(pressedKey)
+            return;
+        console.log('key down:', key);
+        pressedKey = key.code;
+        processKey();
+    };
+
+    const onkeyUp=async ()=>{
+        console.log('key up');
+        if(pressedKey)
+            await stop();
+        pressedKey = '';
+    };
+    const init = async()=> {
+        console.log('init');
+        document.addEventListener('keydown', onKeyDown);
+        document.addEventListener('keyup', onkeyUp);
+        await fetch(leftM + '/' + driverName, {
+            method: 'CREATE',
+        });
+        await fetch(rightM + '/' + driverName, {
+            method: 'CREATE',
+        });
+    }
+
+    init();
+</script>
+</body>
+</html>

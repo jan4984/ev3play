@@ -11,6 +11,9 @@ func main(){
 	r := mux.NewRouter()
 	ev3play.RegisterMotorHandlers(r.PathPrefix("/motor").Subrouter())
 
-	e := http.ListenAndServe(":8080", handlers.CORS()(r))
+	methods := [...]string{"GET","POST","CREATE","DELETE"}
+	e := http.ListenAndServe(":8080", handlers.CORS(
+		handlers.AllowedMethods(methods[:]),
+	)(r))
 	panic(e)
 }
