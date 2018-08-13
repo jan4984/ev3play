@@ -22,8 +22,8 @@
  * [web服务器模块](webServer.py)
  * 然后用go重写了一下[马达控制http服务](motor.go)，加上前端[html按键检测控制](controller.html)
 
- ![](/camera-runner-browser-view.mp4)
- ![](/camera-runner-God-view.mp4)
+ ![](/camera-runner-browser-view.gif)
+ ![](/camera-runner-God-view.gif)
 
 设置一个LED并且用讯飞在线TTS播放一句话
 
