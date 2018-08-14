@@ -1,9 +1,23 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <style>
+        div.direction{
+            border: 1px solid blueviolet;
+            width: 300px;
+            height: 200px;
+        }
+    </style>
+</head>
 <body>
+<div>
+    <textarea id="tts"></textarea>
+    <button id="btnPlay">Play</button>
+</div>
+<div id="dir" tabIndex="0" class="direction"/>
 <script>
-    const ep = 'http://10.0.0.100:8080';
-    //const ep = 'http://127.0.0.1:8080';
+    //const ep = 'http://10.0.0.100:8080';
+    const ep = 'http://127.0.0.1:8080';
     const motorEp = ep + '/motor';
     const leftM = motorEp + '/ev3-ports:outD';
     const rightM = motorEp + '/ev3-ports:outA';
@@ -65,8 +79,11 @@
     };
     const init = async()=> {
         console.log('init');
-        document.addEventListener('keydown', onKeyDown);
-        document.addEventListener('keyup', onkeyUp);
+        document.querySelector('#btnPlay').onclick = async ()=>{
+            await fetch(ep+'/sound/text/'+document.querySelector('#tts').value);
+        };
+        document.querySelector("#dir").onkeydown = onKeyDown;
+        document.querySelector("#dir").onkeyup = onkeyUp;
         await fetch(leftM + '/' + driverName, {
             method: 'CREATE',
         });
