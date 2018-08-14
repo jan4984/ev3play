@@ -29,7 +29,7 @@ func RegisterSoundHandlers(router *mux.Router){
 func playData(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	data,err := ioutil.ReadAll(r.Body)
-	if err != nil {
+	if err == nil {
 		ioutil.WriteFile("/tmp/audio.wav", data, os.ModePerm)
 		exec.Command("/usr/bin/aplay", "-q", "/tmp/audio.wav").Run()
 	}
